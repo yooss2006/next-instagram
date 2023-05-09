@@ -35,7 +35,7 @@ function getContainerStyle(size: string, highLight: boolean): string {
 }
 
 function getImageSizeStyle(size: string): string {
-  const base = "bg-white rounded-full";
+  const base = "object-cover bg-white rounded-full";
   const sizeStyle =
     size === "small" ? "w-[34px] h-[34px] p-[0.1rem]" : "w-16 h-16 p-[0.2rem]";
   return `${base} ${sizeStyle}`;

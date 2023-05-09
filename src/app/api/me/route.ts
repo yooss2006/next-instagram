@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   if (!user) {
     return new Response("Authentication Error", { status: 401 });
   }
-  return getUserByUsername(user.userName).then((data) =>
-    NextResponse.json(data)
+  return getUserByUsername(user.username).then((data) =>
+    NextResponse.json(data[0])
   );
 }
