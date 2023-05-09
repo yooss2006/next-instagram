@@ -1,3 +1,4 @@
+import { getFollowingPostsOf } from "@/service/post";
 import { getUserByUsername } from "@/service/user";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
@@ -9,7 +10,7 @@ export async function GET() {
   if (!user) {
     return new Response("Authentication Error", { status: 401 });
   }
-  return getUserByUsername(user.username).then((data) =>
-    NextResponse.json(data[0])
+  return getFollowingPostsOf(user.username).then((data) =>
+    NextResponse.json(data)
   );
 }
