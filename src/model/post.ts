@@ -7,7 +7,7 @@ export type Comment = {
 export type FullPost = {
   id: string;
   username: string;
-  userIamge: string;
+  userImage: string;
   image: string;
   text: string;
   createdAt: string;
