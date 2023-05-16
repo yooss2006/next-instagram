@@ -7,6 +7,7 @@ import ActionBar from "./ActionBar";
 import CommentForm from "./CommentForm";
 import PostDetail from "./PostDetail";
 import PostModal from "./PostModal";
+import PostUserAvator from "./PostUserAvator";
 import Avatar from "./ui/Avatar";
 import ModalPortal from "./ui/ModalPortal";
 
@@ -21,10 +22,7 @@ export default function PostListCard({ post, priority = false }: Props) {
 
   return (
     <article className="rounded-lg shadow-md border-gray-200">
-      <div className="flex items-center p-2">
-        <Avatar size="medium" image={userImage} highLight />
-        <span className="text-gray-900 font-bold ml-2">{username}</span>
-      </div>
+      <PostUserAvator image={userImage} username={username} />
       <Image
         className="w-full object-cover aspect-square"
         src={image}

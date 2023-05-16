@@ -41,7 +41,7 @@ export default function Navbar() {
         <h1 className="text-3xl font-bold">Instagram</h1>
       </Link>
       <nav className="flex gap-4 items-center p-4">
-        <ul>
+        <ul className="flex items-center gap-2">
           {MENU.map(({ href, icon, clickedIcon }) => (
             <li key={href}>
               <Link href={href}>{pathName === href ? clickedIcon : icon}</Link>
