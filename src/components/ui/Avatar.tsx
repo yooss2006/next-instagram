@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-type AvatarSize = "small" | "medium" | "large";
+type AvatarSize = "small" | "medium" | "large" | "xlarge";
 
 type Props = {
   image?: string | null;
@@ -18,7 +18,7 @@ export default function Avatar({
     <div className={getContainerStyle(size, highLight)}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        className={getImageSizeStyle(size)}
+        className={getImageSizeStyle(size).image}
         alt="user profile"
         src={image ?? undefined}
         referrerPolicy="no-referrer"
@@ -32,29 +32,39 @@ function getContainerStyle(size: AvatarSize, highLight: boolean): string {
   const highLightStyle = highLight
     ? "bg-gradient-to-bl from-fuchsia-600 via-rose-500 to-amber-300"
     : "";
-  const sizeStyle = getContainerSize(size);
-  return `${base} ${highLightStyle} ${sizeStyle}`;
+  const { container } = getImageSizeStyle(size);
+  return `${base} ${highLightStyle} ${container}`;
 }
 
-function getImageSizeStyle(size: AvatarSize): string {
+type ImageSizeStyle = {
+  container: string;
+  image: string;
+};
+
+function getImageSizeStyle(size: AvatarSize): ImageSizeStyle {
   const base = "object-cover bg-white rounded-full";
   switch (size) {
     case "small":
-      return `${base} w-[34px] h-[34px] p-[0.1rem]`;
+      return {
+        image: `${base} w-[34px] h-[34px] p-[0.1rem]`,
+        container: "w-9 h-9",
+      };
     case "medium":
-      return `${base} w-[42px] h-[42px] p-[0.1rem]`;
+      return {
+        image: `${base} w-[42px] h-[42px] p-[0.1rem]`,
+        container: "w-11 h-11",
+      };
     case "large":
-      return `${base} w-16 h-16 p-[0.2rem]`;
-  }
-}
-
-function getContainerSize(size: AvatarSize): string {
-  switch (size) {
-    case "small":
-      return "w-9 h-9";
-    case "medium":
-      return "w-11 h-11";
-    case "large":
-      return "w-[68px] h-[68px]";
+      return {
+        image: `${base} w-16 h-16 p-[0.2rem]`,
+        container: "w-[68px] h-[68px]",
+      };
+    case "xlarge":
+      return {
+        image: `${base} w-[138px] h-[138px] p-[0.3rem]`,
+        container: "w-[142px] h-[142px]",
+      };
+    default:
+      throw new Error(`Unsupported type size: ${size}`);
   }
 }
