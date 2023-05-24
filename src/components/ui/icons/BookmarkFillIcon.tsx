@@ -1,6 +1,10 @@
 import React from "react";
 import { BsFillBookmarkFill } from "react-icons/bs";
 
-export default function BookmarkFillIcon() {
-  return <BsFillBookmarkFill className="w-7 h-7" />;
+type Props = {
+  className?: string;
+};
+
+export default function BookmarkFillIcon({ className = "w7 h-7" }: Props) {
+  return <BsFillBookmarkFill className={className} />;
 }

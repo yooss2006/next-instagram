@@ -26,11 +26,11 @@ export default function RootLayout({
               <Navbar />
             </div>
           </header>
+          <main className="w-full max-w-screen-xl mx-auto flex justify-center">
+            <SWRConfigContext>{children}</SWRConfigContext>
+          </main>
+          <div id="portal" />
         </AuthContext>
-        <main className="w-full flex justify-center">
-          <SWRConfigContext>{children}</SWRConfigContext>
-        </main>
-        <div id="portal" />
       </body>
     </html>
   );
