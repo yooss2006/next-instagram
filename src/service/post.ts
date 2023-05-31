@@ -76,6 +76,22 @@ export async function getSavedPostsOf(username: string) {
 function mapPosts(posts: SimplePost[]) {
   return posts.map((post: SimplePost) => ({
     ...post,
+    likes: post.likes ?? [],
     image: urlFor(post.image),
   }));
+}
+
+export async function likePost(postId: string, userId: string) {
+  return client
+    .patch(postId)
+    .setIfMissing({ likes: [] }) //likes가 없다면 빈 배열로 설정한다.
+    .append("likes", [{ _ref: userId, _type: "reference" }]) //likes가 있다면 append로 넘어가지고 안의 값을 넣는다.
+    .commit({ autoGenerateArrayKeys: true }); //key가 없다면 자동으로 만들어서 할당한다.
+}
+
+export async function dislikePost(postId: string, userId: string) {
+  return client
+    .patch(postId)
+    .unset([`likes[_ref=="${userId}"]`])
+    .commit();
 }

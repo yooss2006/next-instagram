@@ -21,15 +21,23 @@ export const authOption: NextAuthOptions = {
       });
       return true;
     },
-    async session({ session }) {
+    async session({ session, token }) {
       const user = session?.user;
       if (user) {
         session.user = {
           ...user,
           username: user.email?.split("@")[0] || "",
+          id: token.id as string,
         };
       }
       return session;
+    },
+    async jwt({ token, user }) {
+      //토큰이 만들어질 때, 업데이트 될 때 마다 호출
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
     },
   },
   pages: {
