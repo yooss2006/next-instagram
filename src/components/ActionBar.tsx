@@ -14,7 +14,7 @@ type Props = {
 };
 
 export default function ActionBar({ post }: Props) {
-  const { id, likes, username, text, createdAt } = post;
+  const { likes, username, text, createdAt } = post;
   const { data: session } = useSession();
   const user = session?.user;
   const [bookmarked, setBookmarked] = useState(false);
